@@ -7,7 +7,7 @@ import {
 } from '../../services/hn';
 
 const ITEM_TYPES = [
-  'top', 'new', 'show', 'ask', 'job'
+  'top', 'new', 'show', 'ask', 'job',
 ];
 
 export default {
@@ -68,7 +68,7 @@ export default {
 
     itemSubscriber({ dispatch, history }) {
       return history.listen(({ pathname }) => {
-        const match = pathToRegexp(`/item/:itemId`).exec(pathname);
+        const match = pathToRegexp('/item/:itemId').exec(pathname);
         if (match) {
           const itemId = match[1];
           dispatch({
@@ -81,19 +81,19 @@ export default {
   },
 
   effects: {
-    *fetchList({ payload }, { put, call, select }) {
+    * fetchList({ payload }, { put, call, select }) {
       const { type, page } = payload;
       const ids = yield call(fetchIdsByType, type);
       const itemsPerPage = yield select(state => state.item.itemsPerPage);
       const items = yield call(
         fetchItems,
-        ids.slice(itemsPerPage * (page - 1), itemsPerPage * page)
+        ids.slice(itemsPerPage * (page - 1), itemsPerPage * page),
       );
       yield put({ type: 'saveList', payload: { ids, type } });
       yield put({ type: 'saveItems', payload: items });
     },
 
-    *fetchComments({ payload: id }, { put, call }) {
+    * fetchComments({ payload: id }, { put, call }) {
       const item = yield call(fetchItem, id);
       yield put({ type: 'saveItems', payload: [item] });
 
@@ -122,7 +122,7 @@ export default {
         memo[item.id] = item;
         return memo;
       }, {});
-      return { ...state, itemsById: { ...state.itemsById, ...items }};
+      return { ...state, itemsById: { ...state.itemsById, ...items } };
     },
 
     saveActiveType(state, { payload: activeType }) {

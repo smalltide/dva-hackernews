@@ -1,4 +1,3 @@
-
 export function listSelector(state, ownProps) {
   const page = parseInt(ownProps.params.page || 1, 10);
   const { itemsPerPage, activeType, lists, itemsById } = state.item;
