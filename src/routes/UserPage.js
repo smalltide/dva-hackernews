@@ -8,7 +8,6 @@ import Spinner from '../components/Spinner';
 import { timeAgo } from '../utils/filters';
 
 function UserPage({ loading, user }) {
-
   function renderUser() {
     return (
       <div>
@@ -22,7 +21,7 @@ function UserPage({ loading, user }) {
             <span className={styles.label}>Karma: </span>
             <span>{user.karma}</span>
           </li>
-          { user.about ? <li className={styles.about} dangerouslySetInnerHTML={{__html: user.about}} /> : null }
+          { user.about ? <li className={styles.about} dangerouslySetInnerHTML={{ __html: user.about }} /> : null }
         </ul>
         <p className={styles.links}>
           <a href={`https://news.ycombinator.com/submitted?id=${user.id}`} target="_blank">submissions</a>
@@ -37,7 +36,7 @@ function UserPage({ loading, user }) {
     <Layout>
       <div className={styles.normal}>
         <Spinner loading={loading} />
-        { user? renderUser() : null }
+        { user ? renderUser() : null }
       </div>
     </Layout>
   );

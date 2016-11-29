@@ -21,8 +21,13 @@ const Item = ({ item }) => {
       <span className={styles.title}>
         {
           url
-            ? <span><a href={url} target="_blank">{title}</a><span className={styles.host}> ({host(url)})</span></span>
-            : <Link to={`/item/${id}`}>{title}</Link>
+            ?
+              <span>
+                <a href={url} target="_blank">{title}</a>
+                <span className={styles.host}>({host(url)})</span>
+              </span>
+            :
+              <Link to={`/item/${id}`}>{title} </Link>
         }
       </span>
       <br />
@@ -36,9 +41,9 @@ const Item = ({ item }) => {
         {
           type !== 'job'
             ? <span className={styles.commentsLink}>
-                <span>{' | '}</span>
-                <Link to={`/item/${id}`}>{descendants} comments</Link>
-              </span>
+              <span>{' | '}</span>
+              <Link to={`/item/${id}`}>{descendants} comments</Link>
+            </span>
             : null
         }
       </span>
